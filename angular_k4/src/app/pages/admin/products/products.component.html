@@ -1,0 +1,88 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <h1 class="pb-4 text-center text-4xl font-extrabold dark:text-white">
+    Product List
+  </h1>
+  <button
+    routerLink="/admin/products/create"
+    class="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+  >
+    Create New Product
+  </button>
+  <div class="flex">
+    <div class="flex items-center justify-center p-4">
+      <!-- Dropdown menu -->
+      <div class="z-10 w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+          Category
+        </h6>
+        <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+          <li *ngFor="let category of categoryList" class="flex items-center">
+            <input
+              id="apple"
+              type="checkbox"
+              value="{{ category._id }}"
+              class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+
+            <label
+              for="apple"
+              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+            >
+              {{ category.title }} (56)
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">Product name</th>
+          <th scope="col" class="px-6 py-3">Description</th>
+          <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">Price</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let product of productList"
+          class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+        >
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {{ product.title }}
+          </th>
+          <!-- truncateDescription(120) -->
+          <td class="px-6 py-4">
+            {{ product.description | description : 120 }}
+          </td>
+          <td class="px-6 py-4">{{ product.category.title }}</td>
+          <td class="px-6 py-4">${{ product.price }}</td>
+          <td class="px-6 py-4 flex gap-2">
+            <!-- `${}` -->
+            <!-- "['/admin/product', product._id]"  truyen bien vao router-->
+            <a
+              [routerLink]="['/admin/products/edit', product._id]"
+              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              >Edit
+            </a>
+            <!--Envent (target)="statement" (click)="deleteProduct(product.id)" -->
+            <button
+              (click)="handleDeleteProduct(product._id)"
+              class="font-medium text-red-600 dark:text-red-500 hover:underline"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
