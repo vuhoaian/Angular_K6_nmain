@@ -4,7 +4,14 @@ export type User = {
   email: string;
   password: string;
 };
-
+export type responseDataLogin = {
+  token: string;
+  user: {
+      email: string;
+      username: string;
+      role: "admin" | "member";
+  }
+}
 export type UserResponse = {
   total: number;
   page: number;

@@ -22,7 +22,7 @@
         >
           Sign in to your account
         </h1>
-        <form (ngSubmit)="handleLogin()" class="space-y-4 md:space-y-6">
+        <form class="space-y-4 md:space-y-6 " (submit)="handleSubmitLogin()">
           <div>
             <label
               for="email"
@@ -30,7 +30,7 @@
               >Your email</label
             >
             <input
-              [(ngModel)]="loginUser.email"
+            [(ngModel)]="account.email"
               type="email"
               name="email"
               id="email"
@@ -46,7 +46,7 @@
               >Password</label
             >
             <input
-              [(ngModel)]="loginUser.password"
+            [(ngModel)]="account.password"
               type="password"
               name="password"
               id="password"
